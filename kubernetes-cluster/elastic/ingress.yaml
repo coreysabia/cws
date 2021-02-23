@@ -1,0 +1,69 @@
+# Not yet in production
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: es-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  rules:
+  - host: elastic.2edgy4.me
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: elasticsearch-dev-es-http
+          servicePort: 9200
+  tls:
+    # TLS termination configuration
+    # see https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/tls-termination
+    - hosts:
+      - elastic.2edgy4.me
+      secretName: 2edgy4me-wildcard-cert-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: es-ingress-internal
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  rules:
+  - host: elastic.2edgy4.me
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: elasticsearch-dev-es-http
+          servicePort: 9200
+  tls:
+    # TLS termination configuration
+    # see https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/tls-termination
+    - hosts:
+      - elastic.2edgy4.me
+      secretName: 2edgy4me-wildcard-cert-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: kibana-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  rules:
+  - host: elastic.2edgy4.me
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kibana-dev-kb-http
+          servicePort: 5601
+  tls:
+    # TLS termination configuration
+    # see https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/tls-termination
+    - hosts:
+      - elastic.2edgy4.me
+      secretName: 2edgy4me-wildcard-cert-tls

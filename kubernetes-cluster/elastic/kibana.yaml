@@ -1,0 +1,32 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: cws
+spec:
+  version: 7.11.1
+  count: 1
+  elasticsearchRef:
+    name: "cws"
+  http:
+    tls:
+      certificate:
+        secretName: 2edgy4me-wildcard-cert-tls-test
+    service:
+      spec:
+        type: LoadBalancer
+
+  podTemplate:
+    metadata:
+      labels:
+        app: kibana
+    spec:
+      containers:
+      - name: kibana
+        resources:
+          limits:
+            memory: 4Gi
+            cpu: 2
+      volumes:
+      - name: volume
+        persistentVolumeClaim:
+          claimName: kibana-data
