@@ -20,13 +20,13 @@ kubectl -n elastic-system logs -f statefulset.apps/elastic-operator
 kubectl -n elastic-system get pods
 
 
-kubectl apply -f /Users/coreysabia/Documents/GitHub/cws-elastic-k8s/elasticsearch.yaml
+kubectl apply -f /Users/coreysabia/Documents/GitHub/cws/kubernetes-cluster/elastic/elasticsearch.yaml
 
 kubectl get elasticsearch
 
 kubectl get pods
 
-kubectl apply -f /Users/coreysabia/Documents/GitHub/cws-elastic-k8s/kibana.yaml
+kubectl apply -f /Users/coreysabia/Documents/GitHub/cws/kubernetes-cluster/elastic/kibana.yaml
 
 kubectl get kibana
 kubectl get pods
